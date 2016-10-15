@@ -1,0 +1,24 @@
+canvas {
+	border: 1px solid black;
+}
+
+#modal{
+	position:absolute;
+	top: 25%;
+	left:0%;
+	width:500;
+	height:auto;
+}
+
+#modal img{
+	width:150px;
+	margin:15px;
+}
+
+.actived{
+	display:block;
+}
+
+.desactivaded{
+	display: none;
+}
