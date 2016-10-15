@@ -13,6 +13,7 @@ canvas {
 #modal img{
 	width:150px;
 	margin:15px;
+	cursor:pointer;
 }
 
 .actived{
@@ -21,4 +22,7 @@ canvas {
 
 .desactivaded{
 	display: none;
+}
+li{
+	text-decoration: none;
 }

@@ -11,6 +11,7 @@ if(canvas.getContext){
 	fetchInput(context);
 	changeColor(context);
 	changeBG(context);
+	createCircle(context);
 
 } else {
 	alert('sorry your navigator doesn\'t support canvas rendering');
@@ -65,13 +66,13 @@ function changeBG(ctx){
 		            	var filename = this.href.replace(window.location.host, "").replace('http:///canvasJS/', '');
 		            	$("#modal").append("<img src='" + dir + filename + "'>");
 		        	});
-			        	$('#modal img').each(function(index, value){
-			            	console.log($(value));
-			            	$(value).on('click', function(){
-			            		setPictures($(this));
-			            	});
-			            });
-			            modalIsSet = true;
+		        	$('#modal img').each(function(index, value){
+		            	console.log($(value));
+		            	$(value).on('click', function(){
+		            		setPictures($(this));
+		            	});
+		            });
+		            modalIsSet = true;
 			    }
 			});
 		}
@@ -86,6 +87,21 @@ function changeBG(ctx){
 		ctx.clearRect(0, 0, cWidth, cHeight);
 		ctx.drawImage(img, 0, 0, cWidth, cHeight);
 		$('#modal').fadeOut();
+	}
+}
+
+function createCircle(ctx){
+	var width, height, posx, posy;
+	$('#launch_circle').click(function(){
+		width = $('cWidth').val();
+		height = $('cHeight').val();
+		posy = $('posy').val();
+		posx = $('posx').val();
+		drawCircle();
+	});
+
+	function drawCircle(){
+		ctx.arc(posx, posy, 50, width, height, false);
 	}
 }
 
