@@ -11,38 +11,67 @@
 		<div class="col-sm-3 col-md-2 sidebar">
 		          <ul class="nav nav-sidebar">
 		          	<li class="active control-label">Enter a text <content></content></li>
-		            <li class="active">	<input type="text" name="text" id="text_input" class="form-control"></li>
+		            <li class="list-group">	<input type="text" name="text" id="text_input" class="form-control"></li>
 		            <li class="active control-label">Choose a background color</li>
 		            <li><input type="color" id="html5colorpicker" value="#ff0000" class="form-control"></li>
-		            <li><a id="bgimage" href="#">Click to change background image</a></li>
+		            <li class="list-group">
+		            	
+		            </li>
+		            <li class="list-group">
+		            <a id="bgimage" class="panel panel-primary" href="#">Click to change background image</a>
+		            </li>
 		          </ul>
 		          <ul class="nav nav-sidebar">
 		            <li><a id="circle"href="#">Draw a circle</a></li>
 		            <li>
-		            	<ul>
-		            		<li>
+		            	<ul class="list-group">
+		            		<li class="list-group-item">
 			            		<label for="xpos">Position X</label>
-			            		<input type="number" id="xpos" name="xpos">
+			            		<input class="form-control" type="number" id="xpos" name="xpos">
 		            		</li>
-		            		<li>
+		            		<li class="list-group-item">
 		            			<label for="ypos">Position Y</label>
-		            			<input type="number" name="ypos" id="ypos">
+		            			<input class="form-control" type="number" name="ypos" id="ypos">
 		            		</li>
-		            		<li>
-		            			<label for="cWidth">Circle Width</label>
-		            			<input type="number" name="cWidth" id="cWidth">
-		            			<a href="#" id="launch_circle">Draw Circle</a>
+		            		<li class="list-group-item">
+		            			<label for="colorCircle">Choose a color</label>
+		            			<input class="form-control" type="color" name="colorCircle" id="colorCircle">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<label for="cradius">Circle Width</label>
+		            			<input class="form-control" type="number" name="cradius" id="cradius">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<a href="#" id="launch_circle" class="btn btn-success center-block">Draw Circle</a>
 		            		</li>
 		            	</ul>
 		            </li>
-		            <li><a href="">One more nav</a></li>
-		            <li><a href="">Another nav item</a></li>
-		            <li><a href="">More navigation</a></li>
 		          </ul>
 		          <ul class="nav nav-sidebar">
-		            <li><a href="">Nav item again</a></li>
-		            <li><a href="">One more nav</a></li>
-		            <li><a href="">Another nav item</a></li>
+		            <li><a id="circle"href="#">Play the balls game</a></li>
+		            <li>
+		            	<ul class="list-group">
+		            		<li class="list-group-item">
+			            		<label for="ballsNumber">Number of balls</label>
+			            		<input class="form-control" type="number" id="ballsNumber" name="ballsNumber">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<label for="ballsSize">Ball's Size</label>
+		            			<input class="form-control" type="number" name="ballsSize" id="ballsSize">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<label for="ballsColor">Select balls color</label>
+		            			<input class="form-control" type="color" name="ballsColor" id="ballsColor">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<label for="toucheit" class="text-center">Rigidbody?</label>
+		            			<span class="input-group-addon"> <input type="checkbox" name="toucheit" id="toucheit"> </span>
+		            		</li>
+		            		<li class="list-group-item">
+		            			<a href="#launch_game" id="launch_game" class="btn btn-success center-block">Play!</a>
+		            		</li>
+		            	</ul>
+		            </li>
 		          </ul>
 		</div>
 		<div class="col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-0 main">
@@ -53,7 +82,8 @@
 		</div>
 	</div>
 </div>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="assets/jquery.min.js"></script>
+<!-- 	 -->
 <script type="text/javascript" src="assets/canvasJS.js"></script>
 </body>	
 </html>

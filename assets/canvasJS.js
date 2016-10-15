@@ -91,18 +91,26 @@ function changeBG(ctx){
 }
 
 function createCircle(ctx){
-	var width, height, posx, posy;
+	var radius, posx, posy;
 	$('#launch_circle').click(function(){
-		width = $('cWidth').val();
-		height = $('cHeight').val();
-		posy = $('posy').val();
-		posx = $('posx').val();
+		ctx.clearRect(0, 0, cWidth, cHeight);
+		radius = $('#cradius').val();
+		posy = $('#ypos').val();
+		posx = $('#xpos').val();
+		color = $('#colorCircle').val();
+		console.log(radius);
+		console.log(posy);
+		console.log(posx);
 		drawCircle();
 	});
 
 	function drawCircle(){
-		ctx.arc(posx, posy, 50, width, height, false);
+		console.log(ctx);
+		ctx.beginPath();
+		ctx.arc(posx, posy, radius, 0 * Math.PI, 2 * Math.PI, false);
+		ctx.fillStyle = color;
+		ctx.fill();
 	}
-}
+}	
 
 });
