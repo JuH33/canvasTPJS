@@ -45,6 +45,7 @@ function changeColor(ctx){
 
 function changeBG(ctx){
 	var button = $('#bgimage');
+	var modalIsSet = false;
 	button.click(function(){
 		$('#modal').fadeIn(500);
 		getPictures();
@@ -53,22 +54,27 @@ function changeBG(ctx){
 	function getPictures(){
 		var dir = "assets/images/";
 		var fileextension = ".png";
-		$.ajax({
-	    	url: dir,
-	    	success: function (data) {
-	        	//List all .png file names in the page
-	        	$(data).find("a:contains(" + fileextension + ")").each(function () {
-	            	var filename = this.href.replace(window.location.host, "").replace('http:///canvasJS/', '');
-	            	$("#modal").append("<img src='" + dir + filename + "'>");
-	        	});
-	        	$('#modal img').each(function(index, value){
-	            	console.log($(value));
-	            	$(value).on('click', function(){
-	            		setPictures($(this));
-	            	});
-	            });
-		    }
-		});
+	    if(modalIsSet){
+	        $('#modal').fadeIn();
+	    } else {
+			$.ajax({
+		    	url: dir,
+		    	success: function (data) {
+		        	//List all .png file names in the page
+		        	$(data).find("a:contains(" + fileextension + ")").each(function () {
+		            	var filename = this.href.replace(window.location.host, "").replace('http:///canvasJS/', '');
+		            	$("#modal").append("<img src='" + dir + filename + "'>");
+		        	});
+			        	$('#modal img').each(function(index, value){
+			            	console.log($(value));
+			            	$(value).on('click', function(){
+			            		setPictures($(this));
+			            	});
+			            });
+			            modalIsSet = true;
+			    }
+			});
+		}
 	}
 
 	function setPictures(picture){
@@ -79,7 +85,7 @@ function changeBG(ctx){
 			.height('auto');
 		ctx.clearRect(0, 0, cWidth, cHeight);
 		ctx.drawImage(img, 0, 0, cWidth, cHeight);
-		console.log(img);	
+		$('#modal').fadeOut();
 	}
 }
 
