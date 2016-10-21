@@ -9,6 +9,33 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+		            <li><a id="circle"href="#">Play the balls game</a></li>
+		            <li>
+		            	<ul class="list-group">
+		            		<li class="list-group-item">
+			            		<label for="ballsNumber">Number of balls</label>
+			            		<input class="form-control" type="number" id="ballsNumber" name="ballsNumber">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<label for="ballsSize">Ball's Size</label>
+		            			<input class="form-control" type="number" name="ballsSize" id="ballsSize">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<label for="ballsColor">Select balls color</label>
+		            			<input class="form-control" type="color" name="ballsColor" id="ballsColor">
+		            		</li>
+		            		<li class="list-group-item">
+		            			<label for="toucheit" class="text-center">Rigidbody?</label>
+		            			<span class="input-group-addon"> <input type="checkbox" name="toucheit" id="toucheit"> </span>
+		            		</li>
+		            		<li class="list-group-item">
+		            			<div id="launch_game" class="btn btn-success center-block">Play!</div>
+		            			<div id="stop_game_instance" class="btn btn-warning center-block">Break!</div>
+		            		</li>
+		            	</ul>
+		            </li>
+		          </ul>
 		          <ul class="nav nav-sidebar">
 		          	<li class="active control-label">Enter a text <content></content></li>
 		            <li class="list-group">	<input type="text" name="text" id="text_input" class="form-control"></li>
@@ -47,32 +74,7 @@
 		            	</ul>
 		            </li>
 		          </ul>
-		          <ul class="nav nav-sidebar">
-		            <li><a id="circle"href="#">Play the balls game</a></li>
-		            <li>
-		            	<ul class="list-group">
-		            		<li class="list-group-item">
-			            		<label for="ballsNumber">Number of balls</label>
-			            		<input class="form-control" type="number" id="ballsNumber" name="ballsNumber">
-		            		</li>
-		            		<li class="list-group-item">
-		            			<label for="ballsSize">Ball's Size</label>
-		            			<input class="form-control" type="number" name="ballsSize" id="ballsSize">
-		            		</li>
-		            		<li class="list-group-item">
-		            			<label for="ballsColor">Select balls color</label>
-		            			<input class="form-control" type="color" name="ballsColor" id="ballsColor">
-		            		</li>
-		            		<li class="list-group-item">
-		            			<label for="toucheit" class="text-center">Rigidbody?</label>
-		            			<span class="input-group-addon"> <input type="checkbox" name="toucheit" id="toucheit"> </span>
-		            		</li>
-		            		<li class="list-group-item">
-		            			<a href="#launch_game" id="launch_game" class="btn btn-success center-block">Play!</a>
-		            		</li>
-		            	</ul>
-		            </li>
-		          </ul>
+		          
 		</div>
 		<div class="col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-0 main">
 			<div id="modal" class="desactivaded modal-dialog modal-content">
@@ -83,7 +85,9 @@
 	</div>
 </div>
 <script type="text/javascript" src="assets/jquery.min.js"></script>
-<!-- 	 -->
 <script type="text/javascript" src="assets/canvasJS.js"></script>
+<script type="text/javascript" src="test.js"></script>
+<script type="text/javascript" src="assets/gameloop.js"></script>
+<!-- 	 -->
 </body>	
 </html>
