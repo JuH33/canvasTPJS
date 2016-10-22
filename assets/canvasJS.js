@@ -1,5 +1,5 @@
 //global scope variables
-var debug = true; //check to write log in console if needed
+var debug = false; //check to write log in console if needed
 var loopInterval, startTime;
 var loopIsActive = false;
 var cWidth;
@@ -8,6 +8,10 @@ var started_at;
 var lagginRate = 0;
 var context;
 var canvas;
+var ballsSize;
+var ballsNumber;
+var multipleGeneration;
+var ballColor;
 
 
 $(document).ready(function(){
@@ -128,8 +132,8 @@ $(document).ready(function(){
 			});
 		}
 
-		function startGameLoop(){
-			$('#launch_game').on('click', function(){
+		function startGameLoop() {
+			$('#launch_game').on('click', function() {
 				if(loopIsActive == false){
 					if(debug == true){
 						var date_object = new Date();
@@ -138,13 +142,23 @@ $(document).ready(function(){
 					loopIsActive = true;
 					frames = (1000 / frameRate);
 					started_at = Date.now();
-					gamingLoop();
+					setProperties();
+					if(debug){
+						console.log('ballsNumber at start : ' + ballsNumber + ' | '	+ 'ballsSize at start : ' + ballsSize.length);	
+					}
+					generateBalls();
 					stopGameLoop();
 				} else {
 					alert('le jeu est en fonctionnement');
 				}
 			});
 		}
+	}
+
+	function setProperties(){
+		ballsNumber = $('#ballsNumber').val();
+		ballsSize = $('#ballsSize').val();
+		ballColor = $('#ballsColor').val();
 	}
 
 	var physcis2D = function() {

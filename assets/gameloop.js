@@ -6,6 +6,8 @@
 
 	var ball = function(width, height, fillStyle, strokeStyle, lineWidth) {
 		var bProperties = {};
+
+		//position square properties
 		bProperties.x = 0;
 		bProperties.y = 0;
 		bProperties.renderX = 0;
@@ -16,11 +18,21 @@
 		bProperties.VelocityY = 0;
 		bProperties.gravityX = 0;
 		bProperties.gravityY = 0;
+
+		//square properties
 		bProperties.width = width;
 		bProperties.height = height;
 		bProperties.fillStyle = fillStyle;
 		bProperties.strokeStyle = strokeStyle;
 		bProperties.lineWidth = lineWidth;
+
+		//sqare rigidBody properties, it's covering each single vector point starting_()
+		bProperties.a = { x: bProperties.x, y: bProperties.y };
+		bProperties.b = { x: (bProperties.x + bProperties.width), y: bProperties.y };
+		bProperties.c = { x: bProperties.x, y: (bProperties.y + bProperties.height) };
+		bProperties.d = { x: bProperties.b.x, y: bProperties.c.y };
+
+		//the methode will render the block each update()
 		bProperties.render = function(lagAmount, ctx){
 
 			bProperties.renderX = (bProperties.x - bProperties.oldX) * lagAmount + bProperties.oldX;
@@ -34,6 +46,12 @@
 				(bProperties.renderY + (bProperties.height / 2))
 			);
 
+			//properties for rigidbody2d colliders update()
+			bProperties.a = { x: bProperties.x, y: bProperties.y };
+			bProperties.b = { x: (bProperties.x + bProperties.width), y: bProperties.y };
+			bProperties.c = { x: bProperties.x, y: (bProperties.y + bProperties.height) };
+			bProperties.d = { x: bProperties.b.x, y: bProperties.c.y };
+
 			ctx.beginPath();
 		    ctx.rect(-bProperties.width / 2, -bProperties.height / 2, bProperties.width, bProperties.height);
 		    ctx.stroke();
@@ -41,6 +59,8 @@
 
 		    console.log('old position : ' + bProperties.oldX);
 		    console.log('new position : ' + bProperties.x);
+		    console.log('renderx position : ' + bProperties.renderX);
+		    console.log('x bound b value : ' + bProperties.b);
 		    bProperties.oldX = bProperties.x;
 		    bProperties.oldY = bProperties.y;
 		}
@@ -48,14 +68,28 @@
 		return bProperties;
 	};
 
-	var myBall;
-	for (var i = 0; i < 2; i++) {
-	    myBall = ball(150, 150, 'red', "black", 1);
-	    myBall.x = random(0, $('#main_canvas').width() - myBall.width);
-	    console.log($('#main_canvas').width());
-	    myBall.y = random(0, $('#main_canvas').width() - myBall.height);
-	    myBall.velocityX = random(2, 5);
-	    myBall.VelocityY = random(2, 5);
+	var generateBalls = function() {
+		ballsNumber = parseInt(ballsNumber);
+		ballsSize = parseInt(ballsSize);
+		if(multipleGeneration){
+			var resp = confirm('do you wanna add : ' + $('#baballsNumber').val());
+			if(resp) loopBalls();
+		} else {
+			loopBalls();
+		}
+		var myBall;
+		function loopBalls(){
+			for (var i = 0; i < ballsNumber; i++) {
+			    myBall = ball(ballsSize, ballsSize, ballColor, "black", 1);
+			    myBall.x = random(0, $('#main_canvas').width() - myBall.width);
+			    //console.log($('#main_canvas').width());
+			    myBall.y = random(0, $('#main_canvas').width() - myBall.height);
+			    myBall.velocityX = random(2, 5);
+			    myBall.VelocityY = random(2, 5);
+		  	}
+		  	multipleGeneration = true;
+	    }
+	  	gamingLoop();
   	}
 
 	var gamingLoop = function() {
@@ -93,6 +127,7 @@
 		canvasCTX.fill();
 	}
 
+	//unused now
 	function checkIfMovement(){
 		document.onkeypress = function(e){
 			//console.log(e.key == "z");
@@ -114,6 +149,8 @@
 		balls.forEach(function(theBall) {
 			theBall.x += theBall.velocityX;
 			theBall.y += theBall.VelocityY;
+
+			ballsAreCollinding();
 
 			if (theBall.x < 0) {
 				theBall.x = 0;
@@ -138,15 +175,27 @@
 	}
 
 	function rendering(lagAmount){
-
 		context.clearRect(0, 0, $('#main_canvas').width(), $('#main_canvas').height());
-		balls.forEach(function(theBall){
+		var i = 0;
+		for(; i < balls.length;){
 			context.save();
-			theBall.render(lagAmount, context);
+			balls[i].render(lagAmount, context);
 			context.restore();
-		});
+			i++;
+		}
+		// balls.forEach(function(theBall){
+		// 	context.save();
+		// 	theBall.render(lagAmount, context);
+		// 	context.restore();
+		// });
 	}
 
 	function random(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function ballsAreCollinding(){
+		balls.forEach(function(ball){
+			ballSpace = ball.x + ball.width;
+		});
 	}
