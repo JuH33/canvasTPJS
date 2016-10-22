@@ -81,7 +81,23 @@ $(document).ready(function(){
 		        		var filename = this.href.replace('http://' + window.location.host + '/canvasTPJS/', "");
 		        		$("#modal").append("<img src='" + dir + filename + "'>");
 		        	});
-		        	$('#modal img').each(function(index, value){
+		        	$('#modal img').eac	//ballsAreCollinding(theBall, index);
+
+			if (theBall.x < 0) {
+				theBall.x = 0;
+				theBall.velocityX = -theBall.velocityX;
+			}
+
+			if (theBall.x + theBall.width > $('#main_canvas').width()) {
+				theBall.x = $('#main_canvas').width() - theBall.width;
+				theBall.velocityX = -theBall.velocityX;
+			}
+
+			if (theBall.y < 0) {
+				theBall.y = 0;
+				theBall.VelocityY = -theBall.VelocityY;
+			}
+h(function(index, value){
 		        		$(value).on('click', function(){
 		        			setPictures($(this));
 		        		});

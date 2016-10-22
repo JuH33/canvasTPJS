@@ -57,10 +57,10 @@
 		    ctx.stroke();
 		    ctx.fill();
 
-		    console.log('old position : ' + bProperties.oldX);
-		    console.log('new position : ' + bProperties.x);
-		    console.log('renderx position : ' + bProperties.renderX);
-		    console.log('x bound b value : ' + bProperties.b);
+		    //console.log('old position : ' + bProperties.oldX);
+		    //console.log('new position : ' + bProperties.x);
+		    //console.log('renderx position : ' + bProperties.renderX);
+		    //console.log('x bound b value : ' + bProperties.b);
 		    bProperties.oldX = bProperties.x;
 		    bProperties.oldY = bProperties.y;
 		}
@@ -146,11 +146,11 @@
 
 	function updater(){
 
-		balls.forEach(function(theBall) {
+		balls.forEach(function(theBall, index) {
 			theBall.x += theBall.velocityX;
 			theBall.y += theBall.VelocityY;
 
-			ballsAreCollinding();
+			//ballsAreCollinding(theBall, index);
 
 			if (theBall.x < 0) {
 				theBall.x = 0;
@@ -194,8 +194,15 @@
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-	function ballsAreCollinding(){
-		balls.forEach(function(ball){
-			ballSpace = ball.x + ball.width;
-		});
+	function ballsAreCollinding(ball, index) {	
+			for(i = 0; i < balls.length; i++) {
+				var otherBall = balls[i];
+				if(index != i) {
+					console.log(ball.b.x);
+					if(ball.b.x ) {
+						
+						ball.velocityX = -10;
+					}	
+				}
+			};
 	}
