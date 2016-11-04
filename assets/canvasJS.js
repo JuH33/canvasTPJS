@@ -1,5 +1,5 @@
 //global scope variables
-var debug = true; //check to write log in console if needed
+var debug = false; //check to write log in console if needed
 var loopInterval, startTime;
 var loopIsActive = false;
 var cWidth;

@@ -39,8 +39,8 @@
 		    ctx.stroke();
 		    ctx.fill();
 
-		    console.log('old position : ' + bProperties.oldX);
-		    console.log('new position : ' + bProperties.x);
+		    /*console.log('old position : ' + bProperties.oldX);
+		    console.log('new position : ' + bProperties.x);*/
 		    bProperties.oldX = bProperties.x;
 		    bProperties.oldY = bProperties.y;
 		}
@@ -52,7 +52,7 @@
 	for (var i = 0; i < 2; i++) {
 	    myBall = ball(150, 150, 'red', "black", 1);
 	    myBall.x = random(0, $('#main_canvas').width() - myBall.width);
-	    console.log($('#main_canvas').width());
+	    //console.log($('#main_canvas').width());
 	    myBall.y = random(0, $('#main_canvas').width() - myBall.height);
 	    myBall.velocityX = random(2, 5);
 	    myBall.VelocityY = random(2, 5);
@@ -70,11 +70,11 @@
 			}
 		} else {
 			var TimeStartFrame = Date.now();
-			var frameSize = TimeStartFrame - started_at;
+			var frameSize = (TimeStartFrame - started_at);
 			started_at = TimeStartFrame;
 			lagginRate += frameSize;
+			//console.log(lagginRate);
 			while(lagginRate >= frames) {
-				//console.log('updating');
 				updater();
 				lagginRate -= frames;
 			}
@@ -114,7 +114,7 @@
 		balls.forEach(function(theBall) {
 			theBall.x += theBall.velocityX;
 			theBall.y += theBall.VelocityY;
-
+			renderCollider(theBall);
 			if (theBall.x < 0) {
 				theBall.x = 0;
 				theBall.velocityX = -theBall.velocityX;
@@ -135,6 +135,24 @@
 				theBall.VelocityY = -theBall.VelocityY;
 			}
 		});
+	}
+
+	function renderCollider(ball) {
+		var i = 0;
+		for(;i<balls.length;) {
+			//make them different from each others
+			if(balls.indexOf(balls[i]) != balls.indexOf(ball)) {
+				//gauche
+				if (/*setcolider*/) {
+			    	ball.velocityX = -ball.velocityX;
+				}
+				if(/*switch down on other corner*/){
+					ball.velocityY = -ball.VelocityY;
+				}
+			}
+
+			i++;
+		}
 	}
 
 	function rendering(lagAmount){
