@@ -8,6 +8,10 @@ var started_at;
 var lagginRate = 0;
 var context;
 var canvas;
+var ballsSize;
+var ballsNumber;
+var multipleGeneration;
+var ballColor;
 
 
 $(document).ready(function(){
@@ -77,7 +81,23 @@ $(document).ready(function(){
 		        		var filename = this.href.replace('http://' + window.location.host + '/canvasTPJS/', "");
 		        		$("#modal").append("<img src='" + dir + filename + "'>");
 		        	});
-		        	$('#modal img').each(function(index, value){
+		        	$('#modal img').eac	//ballsAreCollinding(theBall, index);
+
+			if (theBall.x < 0) {
+				theBall.x = 0;
+				theBall.velocityX = -theBall.velocityX;
+			}
+
+			if (theBall.x + theBall.width > $('#main_canvas').width()) {
+				theBall.x = $('#main_canvas').width() - theBall.width;
+				theBall.velocityX = -theBall.velocityX;
+			}
+
+			if (theBall.y < 0) {
+				theBall.y = 0;
+				theBall.VelocityY = -theBall.VelocityY;
+			}
+h(function(index, value){
 		        		$(value).on('click', function(){
 		        			setPictures($(this));
 		        		});
@@ -128,8 +148,8 @@ $(document).ready(function(){
 			});
 		}
 
-		function startGameLoop(){
-			$('#launch_game').on('click', function(){
+		function startGameLoop() {
+			$('#launch_game').on('click', function() {
 				if(loopIsActive == false){
 					if(debug == true){
 						var date_object = new Date();
@@ -138,13 +158,23 @@ $(document).ready(function(){
 					loopIsActive = true;
 					frames = (1000 / frameRate);
 					started_at = Date.now();
-					gamingLoop();
+					setProperties();
+					if(debug){
+						console.log('ballsNumber at start : ' + ballsNumber + ' | '	+ 'ballsSize at start : ' + ballsSize.length);	
+					}
+					generateBalls();
 					stopGameLoop();
 				} else {
 					alert('le jeu est en fonctionnement');
 				}
 			});
 		}
+	}
+
+	function setProperties(){
+		ballsNumber = $('#ballsNumber').val();
+		ballsSize = $('#ballsSize').val();
+		ballColor = $('#ballsColor').val();
 	}
 
 	var physcis2D = function() {
