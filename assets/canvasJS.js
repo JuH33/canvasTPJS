@@ -26,8 +26,7 @@ $(document).ready(function(){
 		changeColor(context);
 		changeBG(context);
 		createCircle(context);
-		initGamingLoop(120, context);
-
+		initGamingLoop(100, context);
 	} else {
 		alert('sorry your navigator doesn\'t support canvas rendering');
 	}
