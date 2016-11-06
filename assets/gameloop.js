@@ -68,7 +68,6 @@ var ball = function(width, height, fillStyle, strokeStyle, lineWidth) {
 		//draw the square
 		ctx.beginPath();
 		ctx.rect(-bProperties.width / 2, -bProperties.height / 2, bProperties.width, bProperties.height);
-		ctx.stroke();
 		ctx.fill();
 		ctx.closePath();
 
@@ -240,19 +239,18 @@ function ballsAreCollinding(ball, index) {
 
 function strokeLine(ball) {
 	if(update_count <= 1){
-		if(update_max >= 1000) {
+		if(update_max >= 500) {
 			r += random(1, 250);
 			g += random(1, 250);
 			b += random(1, 250);
-			var l = ball.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
-			console.log(r);
+			var l = ball.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ', 0.2)';
 			(r > 249) ? r = 0 : void(0);
 			(g > 249) ? g = 0 : void(0);
 			(b > 249) ? b = 0 : void(0);
 			update_max = 0;
 		}
-		for(var i = 0; i < balls.length; i++){
-			//console.log(raycastX);
+		context.beginPath();
+		for(var i = 0; i < balls.length; i++) {
 			var ball2 = balls[i];
 			if(ball.name != ball2.name){
 				var raycastX = Math.abs(ball.x - ball2.x);
@@ -260,17 +258,18 @@ function strokeLine(ball) {
 				if(debug == true){
 					console.log(raycastY + ' : ' + raycastX);
 				}
-				if(raycastY < 300 && raycastX < 300) {
-					context.beginPath();
-					context.fillStyle = l;
-					context.moveTo(ball.x + (ball.width / 2), ball.y + (ball.height / 2));
+				if(raycastY < 250 && raycastX < 250) {
+					//moveTo generate a new path with a head at the same position, can't use fill() with it
+					//context.moveTo(ball.x + (ball.width / 2), ball.y + (ball.height / 2));
 					context.lineTo(ball2.x + (ball2.width / 2), ball2.y + (ball2.height / 2));
-					context.fill();
-					context.strokeStyle = l;
-					context.stroke();
 				}	
 			}
 		}
+		context.strokeStyle = "grey";
+		context.stroke();
+		context.fillStyle = l;
+		context.fill();
+		context.closePath();
 	}
 }
 
@@ -280,7 +279,6 @@ function leftColide(ball, ball2) {
 		direction.left = true;
 		return true;
 	} else {
-		//console.log("left collid doesnt work : ball.b.x >= ball2.a.x");
 		return false;
 	}
 }
@@ -290,7 +288,6 @@ function rightColide(ball, ball2) {
 		direction.left = true;
 		return true;
 	} else {
-		//console.log("right collid doesnt work : ball.b.x <= ball2.b.x");
 		return false;
 	}
 }
@@ -299,7 +296,6 @@ function topColide(ball, ball2) {
 		direction.top = true;
 		return true;
 	} else {
-		//console.log("top collid doesnt work : ball.c.y >= ball2.a.y");
 		return false;
 	}
 }
@@ -308,7 +304,6 @@ function bottomColide(ball, ball2) {
 		direction.top = true;
 		return true;
 	} else {
-		//console.log("bottom collid doesnt work : ball.c.y <= ball2.c.y");
 		return false;
 	}
 }
